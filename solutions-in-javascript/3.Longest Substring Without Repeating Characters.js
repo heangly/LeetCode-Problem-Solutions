@@ -1,27 +1,21 @@
 const lengthOfLongestSubstring = (s) => {
   if (!s.length) return 0;
 
-  let start = 0;
+  let left = 0;
+  let right = 0;
+  let set = new Set();
   let maxLength = 0;
-  let map = {};
 
-  for (let i = 0; i < s.length; i++) {
-    let char = s[i];
-    if (map[char] >= start) {
-      start = map[char] + 1;
+  while (right < s.length) {
+    if (!set.has(s[right])) {
+      set.add(s[right]);
+      right++;
+      maxLength = Math.max(maxLength, set.size);
+    } else {
+      left++;
+      set.delete(s[left]);
     }
-    map[char] = i;
-
-    if (i - start + 1 > maxLength) {
-      maxLength = i - start + 1;
-    }
-    console.log('---------------------------------------');
-    console.log('i =', i);
-    console.log(map);
-    console.log('length:', maxLength);
-    console.log('---------------------------------------');
   }
-
   return maxLength;
 };
 
