@@ -2,17 +2,16 @@ const threeSumCloset = (nums, target) => {
   if (nums.length < 3) return null;
 
   nums.sort((a, b) => a - b);
+  let res = Infinity;
 
-  let result = nums[0] + nums[1] + nums[nums.length - 1];
-
-  for (let i = 0; i < nums.length; i++) {
+  for (let i = 0; i < nums.length - 2; i++) {
     let j = i + 1;
     let k = nums.length - 1;
 
     while (j < k) {
       let sum = nums[i] + nums[j] + nums[k];
-      if (Math.abs(target - sum) < Math.abs(target - result)) {
-        result = sum;
+      if (Math.abs(target - sum) < Math.abs(target - res)) {
+        res = sum;
       }
 
       if (sum < target) {
@@ -22,7 +21,7 @@ const threeSumCloset = (nums, target) => {
       }
     }
   }
-  return result;
+  return res;
 };
 
 let nums = [1, 1, 1, 0];
