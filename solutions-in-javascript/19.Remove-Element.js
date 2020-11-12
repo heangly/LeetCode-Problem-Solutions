@@ -5,7 +5,6 @@ const removeElement = (nums, val) => {
       i--;
     }
   }
-  console.log(nums);
   return nums.length;
 };
 
