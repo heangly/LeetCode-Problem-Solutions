@@ -9,6 +9,7 @@ const permute = (nums) => {
     }
 
     for (let i = 0; i < nums.length; i++) {
+      console.log(arraySofar);
       helper(
         [...arraySofar, nums[i]],
         [...nums.slice(0, i), ...nums.slice(i + 1)]
