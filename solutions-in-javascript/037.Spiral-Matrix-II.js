@@ -1,26 +1,29 @@
 const generateMatrix = (n) => {
-  const array1d = [];
-  const array2d = [];
-  const output = [];
-  // generate 1D array from 1 to n^2
-  for (let i = 1; i <= n ** 2; i++) {
-    array1d.push(i);
-  }
-  // turn 1D array to 2D array;
-  while (array1d.length) {
-    array2d.push(array1d.splice(0, n));
-  }
+  const matrix = [...Array(n)].map(() => Array(n).fill(null));
+  const dirs = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ]; // right, down, left, up
+  const steps = [n, n - 1];
 
-  return output;
+  let num = 1;
+  let dir = 0;
+  let x = 0;
+  let y = -1;
+
+  while (steps[dir % 2] > 0) {
+    for (let i = 0; i < steps[dir % 2]; i++) {
+      x += dirs[dir][0];
+      y += dirs[dir][1];
+      matrix[x][y] = num++;
+    }
+
+    steps[dir % 2]--;
+    dir = (dir + 1) % 4;
+  }
+  return matrix;
 };
 
 console.log(generateMatrix(3));
-
-//   [1, 2, 3]           [1,  2,  3]
-//   [4, 5, 6]    =>    [8,  9,  4]
-//   [7, 8, 9]          [7,  6,  5]
-
-// [1,   2,     3,      4]          [1,   2,    3,    4]
-// [5,   6,     7,      8]    =>    [12,  13,   14,   5]
-// [9,   10,    11,    12]          [11,  16,   15,   6]
-// [13,  14,    15,    16]          [10,  9,    8,    7]
